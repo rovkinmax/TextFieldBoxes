@@ -473,43 +473,43 @@ public class TextFieldBoxes extends FrameLayout {
             TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TextFieldBoxes);
 
             /* Texts */
-            this.labelText = styledAttrs.getString(R.styleable.TextFieldBoxes_labelText)
-                    == null ? "" : styledAttrs.getString(R.styleable.TextFieldBoxes_labelText);
-            this.helperText = styledAttrs.getString(R.styleable.TextFieldBoxes_helperText)
-                    == null ? "" : styledAttrs.getString(R.styleable.TextFieldBoxes_helperText);
+            this.labelText = styledAttrs.getString(R.styleable.TextFieldBoxes_tfb_labelText)
+                    == null ? "" : styledAttrs.getString(R.styleable.TextFieldBoxes_tfb_labelText);
+            this.helperText = styledAttrs.getString(R.styleable.TextFieldBoxes_tfb_helperText)
+                    == null ? "" : styledAttrs.getString(R.styleable.TextFieldBoxes_tfb_helperText);
 
             /* Colors */
             this.helperTextColor = styledAttrs
-                    .getInt(R.styleable.TextFieldBoxes_helperTextColor, DEFAULT_TEXT_COLOR);
+                    .getInt(R.styleable.TextFieldBoxes_tfb_helperTextColor, DEFAULT_TEXT_COLOR);
             this.counterTextColor = styledAttrs
-                    .getInt(R.styleable.TextFieldBoxes_counterTextColor, DEFAULT_TEXT_COLOR);
+                    .getInt(R.styleable.TextFieldBoxes_tfb_counterTextColor, DEFAULT_TEXT_COLOR);
             this.errorColor = styledAttrs
-                    .getInt(R.styleable.TextFieldBoxes_errorColor, DEFAULT_ERROR_COLOR);
+                    .getInt(R.styleable.TextFieldBoxes_tfb_errorColor, DEFAULT_ERROR_COLOR);
             this.primaryColor = styledAttrs
-                    .getColor(R.styleable.TextFieldBoxes_primaryColor, DEFAULT_PRIMARY_COLOR);
+                    .getColor(R.styleable.TextFieldBoxes_tfb_primaryColor, DEFAULT_PRIMARY_COLOR);
             this.secondaryColor = styledAttrs
-                    .getColor(R.styleable.TextFieldBoxes_secondaryColor, DEFAULT_TEXT_COLOR);
+                    .getColor(R.styleable.TextFieldBoxes_tfb_secondaryColor, DEFAULT_TEXT_COLOR);
             this.panelBackgroundColor = styledAttrs
-                    .getColor(R.styleable.TextFieldBoxes_panelBackgroundColor, DEFAULT_BG_COLOR);
+                    .getColor(R.styleable.TextFieldBoxes_tfb_panelBackgroundColor, DEFAULT_BG_COLOR);
 
             /* Characters counter */
-            this.maxCharacters = styledAttrs.getInt(R.styleable.TextFieldBoxes_maxCharacters, 0);
-            this.minCharacters = styledAttrs.getInt(R.styleable.TextFieldBoxes_minCharacters, 0);
+            this.maxCharacters = styledAttrs.getInt(R.styleable.TextFieldBoxes_tfb_maxCharacters, 0);
+            this.minCharacters = styledAttrs.getInt(R.styleable.TextFieldBoxes_tfb_minCharacters, 0);
 
             /* Others */
-            this.isManualValidateError = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_manualValidateError, false);
+            this.isManualValidateError = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_tfb_manualValidateError, false);
             this.enabled = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_enabled, true);
             this.iconSignifierResourceId = styledAttrs.
-                    getResourceId(R.styleable.TextFieldBoxes_iconSignifier, 0);
+                    getResourceId(R.styleable.TextFieldBoxes_tfb_iconSignifier, 0);
             this.endIconResourceId = styledAttrs.
-                    getResourceId(R.styleable.TextFieldBoxes_endIcon, 0);
+                    getResourceId(R.styleable.TextFieldBoxes_tfb_endIcon, 0);
             this.isResponsiveIconColor = styledAttrs
-                    .getBoolean(R.styleable.TextFieldBoxes_isResponsiveIconColor, true);
+                    .getBoolean(R.styleable.TextFieldBoxes_tfb_isResponsiveIconColor, true);
             this.hasClearButton = styledAttrs
-                    .getBoolean(R.styleable.TextFieldBoxes_hasClearButton, false);
-            this.hasFocus = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_hasFocus, false);
-            this.alwaysShowHint = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_alwaysShowHint, false);
-            this.useDenseSpacing = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_useDenseSpacing, false);
+                    .getBoolean(R.styleable.TextFieldBoxes_tfb_hasClearButton, false);
+            this.hasFocus = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_tfb_hasFocus, false);
+            this.alwaysShowHint = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_tfb_alwaysShowHint, false);
+            this.useDenseSpacing = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_tfb_useDenseSpacing, false);
 
             styledAttrs.recycle();
 

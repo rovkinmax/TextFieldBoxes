@@ -9,9 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.util.AttributeSet;
-import android.view.View;
 
 
 /**
@@ -114,16 +112,16 @@ public class ExtendedEditText extends TextInputAutoCompleteTextView {
             TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.ExtendedEditText);
 
             /* Texts */
-            this.prefix = styledAttrs.getString(R.styleable.ExtendedEditText_prefix)
-                    == null ? "" : styledAttrs.getString(R.styleable.ExtendedEditText_prefix);
-            this.suffix = styledAttrs.getString(R.styleable.ExtendedEditText_suffix)
-                    == null ? "" : styledAttrs.getString(R.styleable.ExtendedEditText_suffix);
+            this.prefix = styledAttrs.getString(R.styleable.ExtendedEditText_tfb_prefix)
+                    == null ? "" : styledAttrs.getString(R.styleable.ExtendedEditText_tfb_prefix);
+            this.suffix = styledAttrs.getString(R.styleable.ExtendedEditText_tfb_suffix)
+                    == null ? "" : styledAttrs.getString(R.styleable.ExtendedEditText_tfb_suffix);
 
             /* Colors */
             this.prefixTextColor = styledAttrs
-                    .getInt(R.styleable.ExtendedEditText_prefixTextColor, DEFAULT_TEXT_COLOR);
+                    .getInt(R.styleable.ExtendedEditText_tfb_prefixTextColor, DEFAULT_TEXT_COLOR);
             this.suffixTextColor = styledAttrs
-                    .getInt(R.styleable.ExtendedEditText_suffixTextColor, DEFAULT_TEXT_COLOR);
+                    .getInt(R.styleable.ExtendedEditText_tfb_suffixTextColor, DEFAULT_TEXT_COLOR);
             styledAttrs.recycle();
 
         } catch (Exception e) {
