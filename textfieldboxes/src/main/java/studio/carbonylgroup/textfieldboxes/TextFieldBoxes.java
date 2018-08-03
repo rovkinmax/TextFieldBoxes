@@ -16,6 +16,7 @@ import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -153,16 +154,16 @@ public class TextFieldBoxes extends FrameLayout {
      */
     protected boolean isManualValidateError = false;
 
+    private EditText editText;
     protected View panel;
     protected View bottomLine;
     protected Space labelSpace;
     protected Space labelSpaceBelow;
     protected ViewGroup editTextLayout;
-    protected ExtendedEditText editText;
     protected RelativeLayout rightShell;
     protected RelativeLayout upperPanel;
     protected RelativeLayout bottomPart;
-    protected RelativeLayout inputLayout;
+    protected FrameLayout inputLayout;
     protected AppCompatTextView helperLabel;
     protected AppCompatTextView counterLabel;
     protected AppCompatTextView floatingLabel;
@@ -176,22 +177,17 @@ public class TextFieldBoxes extends FrameLayout {
     private Drawable mOriginalEditTextEndDrawable;
 
     public TextFieldBoxes(Context context) {
-
-        super(context);
-        init();
+        this(context, null);
     }
 
     public TextFieldBoxes(Context context, AttributeSet attrs) {
-
-        super(context, attrs);
-        init();
-        handleAttributes(context, attrs);
+        this(context, attrs, R.attr.textFieldBox);
     }
 
     public TextFieldBoxes(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        handleAttributes(context, attrs);
+        handleAttributes(context, attrs, defStyleAttr);
     }
 
     protected void init() {
@@ -234,10 +230,10 @@ public class TextFieldBoxes extends FrameLayout {
         themeArray.recycle();
     }
 
-    protected ExtendedEditText findEditTextChild() {
+    protected EditText findEditTextChild() {
 
-        if (getChildCount() > 0 && getChildAt(0) instanceof ExtendedEditText)
-            return (ExtendedEditText) getChildAt(0);
+        if (getChildCount() > 0 && getChildAt(0) instanceof EditText)
+            return (EditText) getChildAt(0);
         return null;
     }
 
@@ -361,8 +357,14 @@ public class TextFieldBoxes extends FrameLayout {
         removeView(this.editText);
 
         this.editText.setBackgroundColor(Color.TRANSPARENT);
-        this.editText.setDropDownBackgroundDrawable(new ColorDrawable(DEFAULT_FG_COLOR));
+        if (editText instanceof ExtendedEditText) {
+            ((ExtendedEditText) this.editText).setDropDownBackgroundDrawable(new ColorDrawable(DEFAULT_FG_COLOR));
+        }
         this.editText.setMinimumWidth(10);
+        if (TextUtils.isEmpty(this.labelText) && !TextUtils.isEmpty(this.editText.getHint()) && !alwaysShowHint) {
+            this.labelText = this.editText.getHint().toString();
+            this.editText.setHint(null);
+        }
         this.inputLayout = this.findViewById(R.id.text_field_boxes_input_layout);
         this.floatingLabel = findViewById(R.id.text_field_boxes_label);
         this.panel = findViewById(R.id.text_field_boxes_panel);
@@ -396,7 +398,7 @@ public class TextFieldBoxes extends FrameLayout {
         // Have to update useDenseSpacing then the dimensions before the first activation
         setUseDenseSpacing(this.useDenseSpacing);
         updateDimens(this.useDenseSpacing);
-        if (!this.editText.getText().toString().isEmpty() || this.hasFocus)
+        if (!TextUtils.isEmpty(this.editText.getText()) || this.hasFocus)
             activate(false);
     }
 
@@ -424,13 +426,22 @@ public class TextFieldBoxes extends FrameLayout {
             }
         });
 
-        this.editText.setDefaultOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b) setHasFocus(true);
-                else setHasFocus(false);
-            }
-        });
+        if (editText instanceof ExtendedEditText) {
+            ((ExtendedEditText) this.editText).setDefaultOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if (b) setHasFocus(true);
+                    else setHasFocus(false);
+                }
+            });
+        } else {
+            this.editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    setHasFocus(hasFocus);
+                }
+            });
+        }
 
         this.editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -466,11 +477,11 @@ public class TextFieldBoxes extends FrameLayout {
         });
     }
 
-    protected void handleAttributes(Context context, AttributeSet attrs) {
+    protected void handleAttributes(Context context, AttributeSet attrs, int defStyleAttr) {
 
         try {
 
-            TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TextFieldBoxes);
+            TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TextFieldBoxes, defStyleAttr, 0);
 
             /* Texts */
             this.labelText = styledAttrs.getString(R.styleable.TextFieldBoxes_tfb_labelText)
@@ -527,9 +538,9 @@ public class TextFieldBoxes extends FrameLayout {
      */
     protected void deactivate() {
 
-        if (this.editText.getText().toString().isEmpty()) {
+        if (TextUtils.isEmpty(this.editText.getText())) {
 
-            if (this.alwaysShowHint && !this.editText.getHint().toString().isEmpty()) {
+            if (this.alwaysShowHint && !TextUtils.isEmpty(this.editText.getHint())) {
 
                 // If alwaysShowHint, and the hint is not empty,
                 // keep the label on the top and EditText visible.
@@ -566,7 +577,7 @@ public class TextFieldBoxes extends FrameLayout {
 
         this.editText.setAlpha(1);
 
-        if (this.editText.getText().toString().isEmpty() && !isActivated()) {
+        if (TextUtils.isEmpty(this.editText.getText()) && !isActivated()) {
 
             this.editTextLayout.setAlpha(0f);
             this.floatingLabel.setScaleX(1f);
@@ -574,7 +585,7 @@ public class TextFieldBoxes extends FrameLayout {
             this.floatingLabel.setTranslationY(0);
         }
 
-        final boolean keepHint = this.alwaysShowHint && !this.editText.getHint().toString().isEmpty();
+        final boolean keepHint = this.alwaysShowHint && !TextUtils.isEmpty(this.editText.getHint());
         if (animated && !keepHint) {
 
             ViewCompat.animate(this.editTextLayout)
@@ -655,7 +666,7 @@ public class TextFieldBoxes extends FrameLayout {
     /**
      * @deprecated Pseudonym for {@link #validate()} to provide legacy support for
      * a bad PR.
-     *
+     * <p>
      * Note: This does NOT validate that there is an error, it does the opposite
      */
     @Deprecated
@@ -765,8 +776,8 @@ public class TextFieldBoxes extends FrameLayout {
         }
 
         /* Don't Count Space & Line Feed */
-        int length = this.editText.getText().toString() .replaceAll(" ", "")
-                                                        .replaceAll("\n", "").length();
+        int length = this.editText.getText().toString().replaceAll(" ", "")
+                .replaceAll("\n", "").length();
         String lengthStr = Integer.toString(length) + " / ";
         String counterLabelResourceStr = getResources().getString(R.string.counter_label_text_constructor);
         if (this.maxCharacters > 0) {
@@ -1275,6 +1286,11 @@ public class TextFieldBoxes extends FrameLayout {
 
     public boolean getUseDenseSpacing() {
         return this.useDenseSpacing;
+    }
+
+    @Nullable
+    public EditText getEditText() {
+        return editText;
     }
 
     /**

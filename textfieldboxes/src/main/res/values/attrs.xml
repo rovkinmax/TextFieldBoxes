@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="textFieldBox" format="reference"/>
 
     <declare-styleable name="TextFieldBoxes">
 
         <!--Texts-->
-        <attr name="tfb_labelText" format="string" />
-        <attr name="tfb_helperText" format="string" />
+        <attr name="tfb_labelText" format="string"/>
+        <attr name="tfb_helperText" format="string"/>
 
         <!--Colors-->
-        <attr name="tfb_helperTextColor" format="color" />
-        <attr name="tfb_counterTextColor" format="color" />
-        <attr name="tfb_errorColor" format="color" />
-        <attr name="tfb_primaryColor" format="color" />
-        <attr name="tfb_secondaryColor" format="color" />
-        <attr name="tfb_panelBackgroundColor" format="color" />
+        <attr name="tfb_helperTextColor" format="color"/>
+        <attr name="tfb_counterTextColor" format="color"/>
+        <attr name="tfb_errorColor" format="color"/>
+        <attr name="tfb_primaryColor" format="color"/>
+        <attr name="tfb_secondaryColor" format="color"/>
+        <attr name="tfb_panelBackgroundColor" format="color"/>
 
         <!--Characters counter-->
-        <attr name="tfb_maxCharacters" format="integer" />
-        <attr name="tfb_minCharacters" format="integer" />
+        <attr name="tfb_maxCharacters" format="integer"/>
+        <attr name="tfb_minCharacters" format="integer"/>
 
         <!--Others-->
-        <attr name="enabled" format="boolean" />
-        <attr name="tfb_iconSignifier" format="reference" />
-        <attr name="tfb_endIcon" format="reference" />
-        <attr name="tfb_isResponsiveIconColor" format="boolean" />
-        <attr name="tfb_hasClearButton" format="boolean" />
-        <attr name="tfb_hasFocus" format="boolean" />
-        <attr name="tfb_alwaysShowHint" format="boolean" />
-        <attr name="tfb_useDenseSpacing" format="boolean" />
+        <attr name="enabled" format="boolean"/>
+        <attr name="tfb_iconSignifier" format="reference"/>
+        <attr name="tfb_endIcon" format="reference"/>
+        <attr name="tfb_isResponsiveIconColor" format="boolean"/>
+        <attr name="tfb_hasClearButton" format="boolean"/>
+        <attr name="tfb_hasFocus" format="boolean"/>
+        <attr name="tfb_alwaysShowHint" format="boolean"/>
+        <attr name="tfb_useDenseSpacing" format="boolean"/>
 
         <!-- Set whether to automaticavalidateErrordate, or only on demand
                @see {@link TextFieldBoxes#setManualValidateError(boolean) } -->
-        <attr name="tfb_manualValidateError" format="boolean" />
+        <attr name="tfb_manualValidateError" format="boolean"/>
 
     </declare-styleable>
 
     <declare-styleable name="ExtendedEditText">
 
         <!--Texts-->
-        <attr name="tfb_prefix" format="string" />
-        <attr name="tfb_suffix" format="string" />
+        <attr name="tfb_prefix" format="string"/>
+        <attr name="tfb_suffix" format="string"/>
 
         <!--Colors-->
-        <attr name="tfb_prefixTextColor" format="color" />
-        <attr name="tfb_suffixTextColor" format="color" />
+        <attr name="tfb_prefixTextColor" format="color"/>
+        <attr name="tfb_suffixTextColor" format="color"/>
 
     </declare-styleable>
 

@@ -4,16 +4,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="textFieldBox">@style/FieldBox</item>
     </style>
 
     <style name="AppThemeDark" parent="Base.Theme.AppCompat">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="textFieldBox">@style/FieldBox</item>
     </style>
 
     <style name="TextFieldBoxes">
         <item name="android:colorControlHighlight" tools:targetApi="lollipop">#2a4b5c</item>
     </style>
 
+    <style name="FieldBox" parent="android:Widget">
+        <item name="tfb_helperTextColor">#0f0</item>
+        <item name="tfb_primaryColor">#0f0</item>
+        <item name="tfb_secondaryColor">#0f0</item>
+        <item name="tfb_panelBackgroundColor">#F0F</item>
+        <item name="tfb_useDenseSpacing">false</item>
+    </style>
 </resources>
